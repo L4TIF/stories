@@ -12,19 +12,7 @@ const StoryPage = () => {
     const [horizontalLine, setHorizontalLine] = useState(0)
     const timeoutRef = useRef(null)
 
-    useEffect(() => {
-        console.log(stories.length, currentIndex)
-        if (timeoutRef.current) clearTimeout(timeoutRef.current)
-        timeoutRef.current = setTimeout(() => {
-            if (horizontalLine < 100) setHorizontalLine(horizontalLine + 10)
-            if (currentIndex > stories.length) return navigate(`/`)
-        }, 500)
 
-
-        if (horizontalLine === 100 && currentIndex < stories.length) {
-            handleNextStory()
-        }
-    }, [horizontalLine, currentIndex,navigate, handleNextStory])
 
 
     const handleNextStory = useCallback(() => {
@@ -40,7 +28,23 @@ const StoryPage = () => {
         navigate(`/story/${stories[currentIndex - 1].name}`)
         setCurrentIndex(currentIndex - 1)
 
-    }, [currentIndex, navigate])    
+    }, [currentIndex, navigate])
+
+
+
+    useEffect(() => {
+
+        if (timeoutRef.current) clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(() => {
+            if (horizontalLine < 100) setHorizontalLine(horizontalLine + 10)
+            if (currentIndex > stories.length) return navigate(`/`)
+        }, 500)
+
+
+        if (horizontalLine === 100 && currentIndex < stories.length) {
+            handleNextStory()
+        }
+    }, [horizontalLine, currentIndex, navigate, handleNextStory])
 
     const handleStory = (e) => {
         if (e.clientX > 100) handleNextStory()
