@@ -24,7 +24,7 @@ const StoryPage = () => {
         if (horizontalLine === 100 && currentIndex < stories.length) {
             handleNextStory()
         }
-    }, [horizontalLine, currentIndex])
+    }, [horizontalLine, currentIndex, navigate])
 
 
     const handleNextStory = () => {
