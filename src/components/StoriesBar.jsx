@@ -1,6 +1,6 @@
 import React from 'react'
 import Story from './Story'
-import { stories } from '../../public/stories'
+import { stories } from '../../stories'
 
 const StoriesBar = () => {
   return (
