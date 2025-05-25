@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { stories } from '/stories'
 import { ArrowLeft, Ellipsis } from 'lucide-react'
@@ -24,23 +24,23 @@ const StoryPage = () => {
         if (horizontalLine === 100 && currentIndex < stories.length) {
             handleNextStory()
         }
-    }, [horizontalLine, currentIndex, navigate])
+    }, [horizontalLine, currentIndex,navigate, handleNextStory])
 
 
-    const handleNextStory = () => {
+    const handleNextStory = useCallback(() => {
         clearTimeout(timeoutRef.current)
         setHorizontalLine(0)
         navigate(`/story/${stories[currentIndex + 1].name}`)
         setCurrentIndex(currentIndex + 1)
 
-    }
-    const handlePreviousStory = () => {
+    }, [currentIndex, navigate])
+    const handlePreviousStory = useCallback(() => {
         clearTimeout(timeoutRef.current)
         setHorizontalLine(0)
         navigate(`/story/${stories[currentIndex - 1].name}`)
         setCurrentIndex(currentIndex - 1)
 
-    }
+    }, [currentIndex, navigate])    
 
     const handleStory = (e) => {
         if (e.clientX > 100) handleNextStory()
