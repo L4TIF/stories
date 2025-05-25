@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { stories } from '../public/stories'
+import { stories } from '/stories'
 import { ArrowLeft, Ellipsis } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
